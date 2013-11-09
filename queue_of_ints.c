@@ -1,5 +1,10 @@
 /*
+ * File:      queue_of_ints.c
+ * Author:    Michael Sanford 100113669
+ * Date:      06/11/2013
+ * Version:   1.0
  *
+ * Purpose:   module for queue
  */
 
 #include <stdio.h>
@@ -12,21 +17,19 @@ typedef struct queue_T
 {
     int *head;
     int *tail;
-    int length;
-    struct queue_T *next;
-}queue_T;
+    queue_T *next;
+}queue, *queue;
 
 /*
  *
  */
 queue_T new_queue()
 {
-    int *queue;
-    int *new_queue;
-    new_queue = realloc(queue, sizeof(queue) + sizeof(queue[0]));
-    if (sizeof(new_queue) == NULL)
+    queue_T *new_q;
+    new_q = realloc(queue, sizeof(queue) + sizeof(queue[0]));
+    if (new_q == NULL)
         exit(1);
-    queue = new_queue;
+    queue = new_q;
     return queue;
 }
 
@@ -35,8 +38,10 @@ queue_T new_queue()
  */
 int enqueue(queue_T q, int datum)
 {
+    queue_T *new;
     scanf("%d", datum);
-    q.tail = datum;
+    new->tail = datum;
+    q->next = NULL;
     return q.tail;
 }
 
@@ -45,8 +50,8 @@ int enqueue(queue_T q, int datum)
  */
 int first_elem(const queue_T q, int * datum_p)
 {
-    q.head = datum_p;
-    return q.head;
+    datum_p = q.head;
+    return datum_p;
 }
 
 /*
@@ -54,8 +59,11 @@ int first_elem(const queue_T q, int * datum_p)
  */
 int dequeue(queue_T q, int * datum)
 {
+    q.head = datum;
     printf("%d was dequeued.\n", datum);
-    return q.head++;
+    free(q.head);
+    q.head = NULL;
+    return q.head;
 }
 
 /*

@@ -17,9 +17,12 @@
 int main(int argc, char * argv[])
 {
     char *input;
+    char line[1000];
     char *words;
+    char *delim = " \t";
     long int line_length;
     int spaces;
+    input = line;
     if (argc == 2)
         line_length = strtol(argv[1], NULL, 10);
     else if (argc == 1)
@@ -32,7 +35,7 @@ int main(int argc, char * argv[])
         fprintf(stderr, "Error: No Line Length Specified!\n");
         return EXIT_FAILURE;
     }
-    while (input[line_length - 1] != EOF)
+    while (input[line_length - 2] != '\0')
     {
         spaces = 0;
         fgets(input, line_length, stdin);
@@ -43,15 +46,16 @@ int main(int argc, char * argv[])
         }
         for (int i = 0; i < line_length; i++)
         {
-            if (input[i] == ' ')
+            if (input[i] == ' ' || input[i] == '\t')
                 spaces++;
         }
-        words = strtok(input, ' ');
+        words = strtok(input, delim);
         while (words != NULL)
         {
             printf("%s ", words);
-            words = strtok(NULL, ' ');
+            words = strtok(NULL, delim);
         }
+        printf("\n");
     }
     return EXIT_SUCCESS;
 }

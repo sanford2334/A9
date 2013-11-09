@@ -22,14 +22,12 @@ int main(int argc, char * argv[])
         c = getchar();
         if (c == 'e')
         {
-            enqueue(q, in);
-            while ((c = getchar()) != '\n')
-                ;
+            enqueue(q);
         }
         else if (c == 'd')
         {
             is_queue_empty(q);
-            dequeue(q, in);
+            dequeue(q);
         }
         else if (c == 'q')
             break;
